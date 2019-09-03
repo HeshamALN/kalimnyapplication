@@ -1,0 +1,97 @@
+// http://ionicframework.com/docs/theming/
+@import '~@ionic/angular/css/core.css';
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+
+@import url('https://fonts.googleapis.com/css?family=Tajawal&display=swap');
+
+.toolbar-background {
+  background: transparent;
+  border-color: transparent;
+}
+
+.slide-zoom {
+  height: 100%;
+}
+
+.slide-title {
+  margin-top: 2.8rem;
+  //text-align: right;
+}
+
+.slide-image {
+  max-height: 40%;
+  max-width: 60%;
+  margin: auto;
+}
+
+b {
+  font-weight: 500;
+}
+
+p {
+  padding: 0 40px;
+  font-size: 14px;
+  line-height: 1.5;
+  //color: #60646B;
+
+  b {
+    color: #000000;
+  }
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--ion-color-dark);
+}
+
+.swiper-pagination-bullet {
+  background: var(--ion-color-dark);
+}
+
+ion-slides {
+  height: 100%;
+}
+
+.my-custom-menu {
+  color: var(--ion-color-medium);
+}
+
+.toolbar {
+  --border-style: none !important;
+  --border-width: 0 !important;
+  border: none !important;
+}
+
+.main-container {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  height: 100% !important;
+  background: var(--ion-color-medium);
+}
+
+ion-header {
+  background: var(--ion-color-background);
+  height: 80px;
+  ion-toolbar {
+    height: 100%;
+  }
+}
+
+.contact-font-color {
+  --color: var(--ion-color-light);
+  --background: linear-gradient(to right,
+          var(--ion-color-primary),
+          var(--ion-color-secondary));
+}
+
+
+
+
+

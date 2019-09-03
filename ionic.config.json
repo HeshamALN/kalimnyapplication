@@ -1,0 +1,7 @@
+{
+  "name": "kalimny",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

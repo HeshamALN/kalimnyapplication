@@ -1,0 +1,13 @@
+:host {
+  .main-container {
+    height: auto !important;
+  }
+
+  ion-content {
+    --ion-background-color: var(--ion-color-light) !important;
+  }
+
+  .item {
+    box-shadow: 0 1px 0px -1px rgba(#000, 0.3);
+  }
+}

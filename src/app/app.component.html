@@ -1,0 +1,38 @@
+<ion-app>
+  <ion-split-pane [when]="false">
+    <ion-menu type="overlay" menuId="menu">
+      <ion-header no-border>
+        <ion-toolbar color="none" no-border>
+          <ion-buttons slot="end">
+            <ion-button fill="clear" (click)="menu.close()">
+              <ion-icon color="light" name="arrow-back"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title color="light">الإعدادات</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-menu-toggle autoHide="false">
+          <ion-item lines="none"
+                    padding-vertical>
+            <ion-label color="light">{{_assistant.getAssistantName() + ' مستعدة! '}}</ion-label>
+            <ion-toggle dir="ltr" color="success"
+                        *ngIf="notificationStatus !== null"
+                        (ionChange)="changeNotificationStatus($event)"
+                        [checked]="notificationStatus"></ion-toggle>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-content>
+
+      <ion-footer>
+        <ion-item (click)="exit()" justify-content-center text-center>
+          <ion-label>
+            <ion-icon name="power" color="light" style="font-size: 150%"></ion-icon>
+          </ion-label>
+        </ion-item>
+      </ion-footer>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

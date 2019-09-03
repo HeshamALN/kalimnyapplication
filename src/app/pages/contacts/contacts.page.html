@@ -1,0 +1,54 @@
+<ion-header no-border mode="md">
+  <ion-toolbar color="none" no-border class="toolbar" mode="md">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <!--<ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon name="more" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>-->
+    <ion-title color="light" align-items-center>
+      جهات الإتصال
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="md">
+  <div class="main-container" style="background: var(--ion-color-light)" padding-horizontal>
+    <ion-searchbar showCancelButton="focus"
+                   placeholder="بحث"
+                   animated
+                   (ionChange)="search($event)"
+                   color="medium"></ion-searchbar>
+    <ng-container *ngIf="filteredContacts">
+      <ion-item *ngFor="let contact of filteredContacts"
+                class="animated bounceInDown"
+                color="none"
+                lines="none">
+        <ion-avatar slot="start">
+          <ion-icon color="primary" name="contact" style="font-size: -webkit-xxx-large"></ion-icon>
+        </ion-avatar>
+        <ion-button slot="end"
+                    color="none"
+                    fill="clear"
+                    (click)="delete(contact)">
+          <ion-icon name="trash" color="danger"></ion-icon>
+        </ion-button>
+        <ion-label color="primary">
+          <p no-padding>
+            {{contact?.name}}
+          </p>
+          <p no-padding>
+            {{contact?.phoneNumber.replace('+965', '965-')}}
+          </p>
+        </ion-label>
+      </ion-item>
+    </ng-container>
+  </div>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" (click)="getContact()">
+    <ion-fab-button color="primary">
+      <ion-icon name="person-add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,11 @@
+:host .main-container {
+  height: auto !important;
+}
+:host ion-content {
+  --ion-background-color: var(--ion-color-light) !important;
+}
+:host .item {
+  box-shadow: 0 1px 0px -1px rgba(0, 0, 0, 0.3);
+}
+
+/*# sourceMappingURL=contacts.page.css.map */

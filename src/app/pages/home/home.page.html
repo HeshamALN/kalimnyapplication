@@ -1,0 +1,155 @@
+<ion-header no-border mode="md">
+  <ion-toolbar color="none" no-border class="toolbar" mode="md">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" routerLink="/contacts" routerDirection="forward">
+        <ion-icon name="contacts" mode="md" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen mode="md">
+  <div class="main-container">
+    <div class="first-container">
+      <div class="scrollable-list" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+        <div *ngFor="let message of _chat.chat" margin-horizontal>
+          <div *ngIf="message?.byAssistant"
+               class="animated bounceInRight"
+               text-left>
+            <p class="assistant-message">
+              {{message?.text}}
+            </p>
+            <small class="assistant-message-name">
+              <ion-icon name="send"
+                        color="success"
+                        mode="md"
+                        style="vertical-align: middle"
+                        (click)="openLink('https://api.whatsapp.com/send?text=' + message?.text)"
+                        *ngIf="message?.translation"></ion-icon>
+              {{_assistant.getAssistantName()}}
+            </small>
+          </div>
+          <div *ngIf="!message?.byAssistant"
+               class="animated bounceInLeft">
+            <p class="message">
+              {{message?.text}}
+            </p>
+          </div>
+          <div id="pin"></div>
+        </div>
+      </div>
+    </div>
+    <div class="second-container" text-nowrap>
+      <div scrollX="true">
+        <ion-chip [id]="'chip'+i"
+                  *ngFor="let sug of suggestions; let i = index"
+                  class="chip">
+          <ion-label color="light">{{sug}}</ion-label>
+        </ion-chip>
+      </div>
+    </div>
+    <div class="third-container">
+      <div class="first-layer"
+           id="mic-first-layer"
+           *ngIf="!isListening && !isProcessing"
+           (click)="listenWithGoogle()">
+        <div class="second-layer">
+          <div class="third-layer">
+            <div id="mic" class="mic-div animated heartBeat">
+              <img class="mic-image" alt="mic"
+                   src="../../../assets/transparent_without_title_button.png" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id='bars'
+           *ngIf="isListening && !isProcessing"
+           (click)="isIOS() ? stopListeningWithGoogle() : listenWithGoogle()">
+        <div class='bar'></div>
+        <div class='bar'></div>
+        <div class='bar'></div>
+        <div class='bar'></div>
+        <div class='bar'></div>
+        <div class='bar'></div>
+        <div class='bar'></div>
+        <div class='bar'></div>
+        <div class='bar'></div>
+        <div class='bar'></div>
+      </div>
+      <ion-progress-bar type="indeterminate"
+                        reversed="true"
+                        color="secondary"
+                        *ngIf="isProcessing"></ion-progress-bar>
+    </div>
+    <div class="forth-container" [ngStyle]="{'height': fivePercentHeight+'px'}"></div>
+  </div>
+</ion-content>
+
+<ion-bottom-drawer *ngIf="items?.length > 0 && images?.length < 1"
+                   [(state)]="drawerState"
+                   [minimumHeight]="minimumHeight"
+                   [dockedHeight]="dockedHeight"
+                   [shouldBounce]="shouldBounce"
+                   [distanceTop]="distanceTop">
+  <div class="drawer-content">
+    <ion-row justify-content-center
+             align-items-center
+             text-center
+             style="height: 50px"
+             [ngStyle]="{'height': fivePercentHeight+'px'}"
+             (click)="drawerState === 0 ? drawerState = 1 :
+             drawerState === 1 ? drawerState = 2 :
+             drawerState === 2 ? drawerState = 0: null">
+      <div class="drawer-handle"></div>
+    </ion-row>
+    <div scrollY="true" class="myScrollDiv">
+      <ion-card color="light"
+                class="item-card animated slideInUp"
+                text-right
+                *ngFor="let item of items; let i = index"
+                (click)="openLink(item?.link, i)"
+                [id]="'card'+i">
+        <ion-card-header>
+          <ion-card-title>{{item?.title}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>{{item?.snippet}}</ion-card-content>
+      </ion-card>
+      <div [ngStyle]="{'height': fivePercentHeight*2+'px'}"></div>
+   </div>
+  </div>
+</ion-bottom-drawer>
+
+<ion-bottom-drawer *ngIf="images?.length > 0 && items?.length < 1"
+                   [(state)]="drawerState"
+                   [minimumHeight]="minimumHeight"
+                   [dockedHeight]="dockedHeight"
+                   [shouldBounce]="shouldBounce"
+                   [distanceTop]="distanceTop">
+  <div class="drawer-content">
+    <ion-row justify-content-center
+             align-items-center
+             text-center
+             style="height: 50px"
+             [ngStyle]="{'height': fivePercentHeight+'px'}"
+             (click)="drawerState === 0 ? drawerState = 1 :
+             drawerState === 1 ? drawerState = 2 :
+             drawerState === 2 ? drawerState = 0: null">
+      <div class="drawer-handle"></div>
+    </ion-row>
+    <div scrollY="true" class="myScrollDiv">
+      <ion-card class="animated slideInUp"
+                text-right
+                [href]="img?.url"
+                *ngFor="let img of images; let i = index"
+                [id]="'card'+i">
+        <ion-card-content no-padding>
+          <img [src]="img?.url" alt="">
+        </ion-card-content>
+      </ion-card>
+      <div [ngStyle]="{'height': fivePercentHeight*2+'px'}"></div>
+    </div>
+  </div>
+</ion-bottom-drawer>
